@@ -45,7 +45,7 @@ const CLASS_HEADER_COLORS: Record<SeatClass, string> = {
 
 export function SeatMap({ flight, initialSeats, bookedSeatIds }: SeatMapProps) {
   const router = useRouter()
-  const { selectedSeat, setSelectedSeat } = useFlightStore()
+  const { selectedSeat, setSelectedSeat, setSelectedFlight } = useFlightStore()
   const [seats, setSeats] = useState<Seat[]>(initialSeats)
 
   // Realtime: update a single seat when another user books it
@@ -295,7 +295,10 @@ export function SeatMap({ flight, initialSeats, bookedSeatIds }: SeatMapProps) {
               )}
             </div>
             <button
-              onClick={() => router.push('/booking/details')}
+              onClick={() => {
+                setSelectedFlight(flight)
+                router.push('/booking/details')
+              }}
               className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold px-6 py-3 rounded-xl transition-colors whitespace-nowrap"
             >
               Continue →

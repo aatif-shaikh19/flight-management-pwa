@@ -12,24 +12,47 @@ export type SearchQuery = {
   passengers: number
 }
 
+export type BookingStep = 'search' | 'seat' | 'details' | 'confirmed'
+
+// passportNo intentionally excluded — never persisted (PII)
+export type PassengerFormState = {
+  fullName: string
+  nationality: string
+  dob: string
+}
+
 type FlightStore = {
   // Search
   searchQuery: SearchQuery | null
   setSearchQuery: (query: SearchQuery) => void
 
-  // Selected flight (set when user clicks a flight card)
+  // Selected flight
   selectedFlight: Flight | null
   setSelectedFlight: (flight: Flight) => void
 
-  // Selected seat (set in seat map phase)
+  // Selected seat
   selectedSeat: Seat | null
-  setSelectedSeat: (seat: Seat) => void
+  setSelectedSeat: (seat: Seat | null) => void
 
-  // Reset only the booking flow (keep search)
+  // Booking progress
+  bookingStep: BookingStep
+  setBookingStep: (step: BookingStep) => void
+
+  // Passenger form (passport excluded — lives in component state only)
+  passengerForm: PassengerFormState
+  setPassengerForm: (data: Partial<PassengerFormState>) => void
+
+  // Reset booking flow (keep search query)
   resetBookingFlow: () => void
 
   // Full reset (on logout)
   reset: () => void
+}
+
+const DEFAULT_PASSENGER_FORM: PassengerFormState = {
+  fullName: '',
+  nationality: '',
+  dob: '',
 }
 
 export const useFlightStore = create<FlightStore>()(
@@ -39,28 +62,54 @@ export const useFlightStore = create<FlightStore>()(
       setSearchQuery: (query) => set({ searchQuery: query }),
 
       selectedFlight: null,
-      setSelectedFlight: (flight) => set({ selectedFlight: flight }),
+      setSelectedFlight: (flight) => set({
+        selectedFlight: flight,
+        bookingStep: 'seat',
+      }),
 
       selectedSeat: null,
       setSelectedSeat: (seat) => set({ selectedSeat: seat }),
 
-      resetBookingFlow: () => set({
-        selectedFlight: null,
-        selectedSeat: null,
-      }),
+      bookingStep: 'search',
+      setBookingStep: (step) => set({ bookingStep: step }),
 
-      reset: () => set({
-        searchQuery: null,
-        selectedFlight: null,
-        selectedSeat: null,
-      }),
+      passengerForm: DEFAULT_PASSENGER_FORM,
+      setPassengerForm: (data) =>
+        set((state) => ({
+          passengerForm: { ...state.passengerForm, ...data },
+        })),
+
+      resetBookingFlow: () =>
+        set({
+          selectedFlight: null,
+          selectedSeat: null,
+          bookingStep: 'search',
+          passengerForm: DEFAULT_PASSENGER_FORM,
+        }),
+
+      reset: () =>
+        set({
+          searchQuery: null,
+          selectedFlight: null,
+          selectedSeat: null,
+          bookingStep: 'search',
+          passengerForm: DEFAULT_PASSENGER_FORM,
+        }),
     }),
     {
       name: 'flight-store',
       storage: createJSONStorage(() => localStorage),
-      // Only persist the search query — not selected flight/seat
+      // CRITICAL: only persist safe fields
+      // passportNo is NEVER included here — it never leaves component state
       partialize: (state) => ({
         searchQuery: state.searchQuery,
+        bookingStep: state.bookingStep,
+        passengerForm: {
+          fullName: state.passengerForm.fullName,
+          nationality: state.passengerForm.nationality,
+          dob: state.passengerForm.dob,
+          // passportNo intentionally omitted
+        },
       }),
     }
   )
