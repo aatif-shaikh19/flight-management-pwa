@@ -115,11 +115,11 @@ export function SeatMap({ flight, initialSeats, bookedSeatIds }: SeatMapProps) {
             // First: A | C D
             <>
               {['A'].map((c) => (
-                <span key={c} className="w-13 sm:w-14 text-center text-xs font-bold text-gray-400">{c}</span>
+                <span key={c} className="w-[52px] sm:w-14 text-center text-xs font-bold text-gray-400">{c}</span>
               ))}
               <span className="w-8 sm:w-10" />
               {['C', 'D'].map((c) => (
-                <span key={c} className="w-13 sm:w-14 text-center text-xs font-bold text-gray-400">{c}</span>
+                <span key={c} className="w-[52px] sm:w-14 text-center text-xs font-bold text-gray-400">{c}</span>
               ))}
             </>
           )}
@@ -207,7 +207,7 @@ export function SeatMap({ flight, initialSeats, bookedSeatIds }: SeatMapProps) {
                   <>
                     {['A'].map((col) => {
                       const seat = seatMap.get(`${rowNum}${col}`)
-                      if (!seat) return <div key={col} className="w-13 sm:w-14 h-13 sm:h-14" />
+                      if (!seat) return <div key={col} className="w-[52px] sm:w-14 h-[52px] sm:h-14" />
                       return (
                         <SeatButton
                           key={seat.id}
@@ -221,7 +221,7 @@ export function SeatMap({ flight, initialSeats, bookedSeatIds }: SeatMapProps) {
                     <div className="w-8 sm:w-10" />
                     {['C', 'D'].map((col) => {
                       const seat = seatMap.get(`${rowNum}${col}`)
-                      if (!seat) return <div key={col} className="w-13 sm:w-14 h-13 sm:h-14" />
+                      if (!seat) return <div key={col} className="w-[52px] sm:w-14 h-[52px] sm:h-14" />
                       return (
                         <SeatButton
                           key={seat.id}

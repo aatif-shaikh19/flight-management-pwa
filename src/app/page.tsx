@@ -1,5 +1,5 @@
 import { SearchForm } from '@/components/flights/SearchForm'
-import { Plane, Shield, Zap, Clock } from 'lucide-react'
+import { Plane, Shield, Zap } from 'lucide-react'
 
 export default function HomePage() {
   return (
