@@ -5,6 +5,8 @@
 ## Live Demo
 
 [Production URL](https://flight-management-pwa-virid.vercel.app/)
+## Lighthouse Scores
+![Lighthouse Scores](./public/lighthouse.png)
 
 ## Tech Stack
 
