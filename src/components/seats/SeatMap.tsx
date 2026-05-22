@@ -86,40 +86,40 @@ export function SeatMap({ flight, initialSeats, bookedSeatIds }: SeatMapProps) {
 
         {/* Column headers */}
         <div className={cn(
-          'flex gap-2 mb-1 px-8',
+          'flex gap-1 sm:gap-2 mb-1 px-6 sm:px-8',
           seatClass === 'economy' ? 'justify-between' : 'justify-center'
         )}>
           {seatClass === 'economy' ? (
             // Economy: A B C | D E F (with aisle gap label)
             <>
               {['A', 'B', 'C'].map((c) => (
-                <span key={c} className="w-10 text-center text-xs font-bold text-gray-400">{c}</span>
+                <span key={c} className="w-9 sm:w-10 text-center text-xs font-bold text-gray-400">{c}</span>
               ))}
-              <span className="w-6" />
+              <span className="w-4 sm:w-6" />
               {['D', 'E', 'F'].map((c) => (
-                <span key={c} className="w-10 text-center text-xs font-bold text-gray-400">{c}</span>
+                <span key={c} className="w-9 sm:w-10 text-center text-xs font-bold text-gray-400">{c}</span>
               ))}
             </>
           ) : seatClass === 'business' ? (
             // Business: A B | E F
             <>
               {['A', 'B'].map((c) => (
-                <span key={c} className="w-12 text-center text-xs font-bold text-gray-400">{c}</span>
+                <span key={c} className="w-11 sm:w-12 text-center text-xs font-bold text-gray-400">{c}</span>
               ))}
-              <span className="w-8" />
+              <span className="w-6 sm:w-8" />
               {['E', 'F'].map((c) => (
-                <span key={c} className="w-12 text-center text-xs font-bold text-gray-400">{c}</span>
+                <span key={c} className="w-11 sm:w-12 text-center text-xs font-bold text-gray-400">{c}</span>
               ))}
             </>
           ) : (
             // First: A | C D
             <>
               {['A'].map((c) => (
-                <span key={c} className="w-14 text-center text-xs font-bold text-gray-400">{c}</span>
+                <span key={c} className="w-13 sm:w-14 text-center text-xs font-bold text-gray-400">{c}</span>
               ))}
-              <span className="w-10" />
+              <span className="w-8 sm:w-10" />
               {['C', 'D'].map((c) => (
-                <span key={c} className="w-14 text-center text-xs font-bold text-gray-400">{c}</span>
+                <span key={c} className="w-13 sm:w-14 text-center text-xs font-bold text-gray-400">{c}</span>
               ))}
             </>
           )}
@@ -128,22 +128,22 @@ export function SeatMap({ flight, initialSeats, bookedSeatIds }: SeatMapProps) {
         {/* Rows */}
         <div className="flex flex-col gap-1.5">
           {rows.map((rowNum) => (
-            <div key={rowNum} className="flex items-center gap-2">
+            <div key={rowNum} className="flex items-center gap-1 sm:gap-2">
               {/* Row number */}
-              <span className="w-6 text-right text-xs text-gray-300 font-mono shrink-0">
+              <span className="w-5 sm:w-6 text-right text-xs text-gray-300 font-mono shrink-0">
                 {rowNum}
               </span>
 
               {/* Seats with aisle gap */}
               <div className={cn(
-                'flex gap-1.5 flex-1',
+                'flex gap-1 sm:gap-1.5 flex-1',
                 seatClass === 'economy' ? 'justify-between' : 'justify-center'
               )}>
                 {seatClass === 'economy' ? (
                   <>
                     {['A', 'B', 'C'].map((col) => {
                       const seat = seatMap.get(`${rowNum}${col}`)
-                      if (!seat) return <div key={col} className="w-10 h-10" />
+                      if (!seat) return <div key={col} className="w-9 sm:w-10 h-11" />
                       return (
                         <SeatButton
                           key={seat.id}
@@ -155,12 +155,12 @@ export function SeatMap({ flight, initialSeats, bookedSeatIds }: SeatMapProps) {
                       )
                     })}
                     {/* Aisle */}
-                    <div className="w-6 flex items-center justify-center">
+                    <div className="w-4 sm:w-6 flex items-center justify-center">
                       <span className="text-xs text-gray-200">|</span>
                     </div>
                     {['D', 'E', 'F'].map((col) => {
                       const seat = seatMap.get(`${rowNum}${col}`)
-                      if (!seat) return <div key={col} className="w-10 h-10" />
+                      if (!seat) return <div key={col} className="w-9 sm:w-10 h-11" />
                       return (
                         <SeatButton
                           key={seat.id}
@@ -176,7 +176,7 @@ export function SeatMap({ flight, initialSeats, bookedSeatIds }: SeatMapProps) {
                   <>
                     {['A', 'B'].map((col) => {
                       const seat = seatMap.get(`${rowNum}${col}`)
-                      if (!seat) return <div key={col} className="w-12 h-12" />
+                      if (!seat) return <div key={col} className="w-11 sm:w-12 h-11 sm:h-12" />
                       return (
                         <SeatButton
                           key={seat.id}
@@ -187,10 +187,10 @@ export function SeatMap({ flight, initialSeats, bookedSeatIds }: SeatMapProps) {
                         />
                       )
                     })}
-                    <div className="w-8" />
+                    <div className="w-6 sm:w-8" />
                     {['E', 'F'].map((col) => {
                       const seat = seatMap.get(`${rowNum}${col}`)
-                      if (!seat) return <div key={col} className="w-12 h-12" />
+                      if (!seat) return <div key={col} className="w-11 sm:w-12 h-11 sm:h-12" />
                       return (
                         <SeatButton
                           key={seat.id}
@@ -207,7 +207,7 @@ export function SeatMap({ flight, initialSeats, bookedSeatIds }: SeatMapProps) {
                   <>
                     {['A'].map((col) => {
                       const seat = seatMap.get(`${rowNum}${col}`)
-                      if (!seat) return <div key={col} className="w-14 h-14" />
+                      if (!seat) return <div key={col} className="w-13 sm:w-14 h-13 sm:h-14" />
                       return (
                         <SeatButton
                           key={seat.id}
@@ -218,10 +218,10 @@ export function SeatMap({ flight, initialSeats, bookedSeatIds }: SeatMapProps) {
                         />
                       )
                     })}
-                    <div className="w-10" />
+                    <div className="w-8 sm:w-10" />
                     {['C', 'D'].map((col) => {
                       const seat = seatMap.get(`${rowNum}${col}`)
-                      if (!seat) return <div key={col} className="w-14 h-14" />
+                      if (!seat) return <div key={col} className="w-13 sm:w-14 h-13 sm:h-14" />
                       return (
                         <SeatButton
                           key={seat.id}
@@ -255,7 +255,7 @@ export function SeatMap({ flight, initialSeats, bookedSeatIds }: SeatMapProps) {
 
       {/* Scrollable seat grid */}
       <div className="overflow-x-auto pb-4">
-        <div className="min-w-[320px] max-w-md mx-auto">
+        <div className="min-w-[280px] sm:min-w-[320px] max-w-md mx-auto">
           {/* Nose of plane */}
           <div className="flex justify-center mb-4">
             <div className="bg-gray-100 border border-gray-200 text-gray-400 text-xs px-6 py-1.5 rounded-full">

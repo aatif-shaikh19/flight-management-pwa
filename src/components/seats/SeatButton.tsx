@@ -31,9 +31,9 @@ export function SeatButton({ seat, isSelected, isBooked, onSelect }: SeatButtonP
   })
 
   const sizeClass = cn({
-    'w-10 h-10 text-xs': seat.class === 'economy',
-    'w-12 h-12 text-xs': seat.class === 'business',
-    'w-14 h-14 text-sm': seat.class === 'first',
+    'w-9 sm:w-10 h-11 text-xs': seat.class === 'economy',
+    'w-11 sm:w-12 h-11 sm:h-12 text-xs': seat.class === 'business',
+    'w-13 sm:w-14 h-13 sm:h-14 text-sm': seat.class === 'first',
   })
 
   function handleClick() {
