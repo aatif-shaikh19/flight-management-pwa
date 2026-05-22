@@ -46,6 +46,9 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           {user ? (
             <>
+              <span className="text-sm text-gray-500 hidden sm:inline-block mr-2">
+                {user.email}
+              </span>
               <a
                 href="/bookings"
                 className="text-sm text-gray-600 hover:text-gray-900 font-medium"
