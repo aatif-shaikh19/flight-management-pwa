@@ -42,12 +42,13 @@ export function AuthForm({ mode }: AuthFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-sm">
+    <form suppressHydrationWarning onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-sm">
       <div className="flex flex-col gap-1">
         <label htmlFor="email" className="text-sm font-medium text-gray-700">
           Email
         </label>
         <input
+          suppressHydrationWarning
           id="email"
           type="email"
           required
@@ -63,6 +64,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           Password
         </label>
         <input
+          suppressHydrationWarning
           id="password"
           type="password"
           required
@@ -81,6 +83,7 @@ export function AuthForm({ mode }: AuthFormProps) {
       )}
 
       <button
+        suppressHydrationWarning
         type="submit"
         disabled={loading}
         className={cn(

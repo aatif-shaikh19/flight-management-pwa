@@ -80,7 +80,7 @@ export function PassengerForm({ flight, seat }: PassengerFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+    <form suppressHydrationWarning onSubmit={handleSubmit} className="flex flex-col gap-5">
       {/* Booking summary card */}
       <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4">
         <p className="text-xs font-semibold text-blue-600 uppercase tracking-wide mb-2">
@@ -113,6 +113,7 @@ export function PassengerForm({ flight, seat }: PassengerFormProps) {
           <User className="w-3.5 h-3.5" /> Full Name
         </label>
         <input
+          suppressHydrationWarning
           type="text"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
@@ -129,6 +130,7 @@ export function PassengerForm({ flight, seat }: PassengerFormProps) {
           <CreditCard className="w-3.5 h-3.5" /> Passport Number
         </label>
         <input
+          suppressHydrationWarning
           type="text"
           value={passportNo}
           onChange={(e) => setPassportNo(e.target.value.toUpperCase())}
@@ -149,6 +151,7 @@ export function PassengerForm({ flight, seat }: PassengerFormProps) {
           <Globe className="w-3.5 h-3.5" /> Nationality
         </label>
         <input
+          suppressHydrationWarning
           type="text"
           value={nationality}
           onChange={(e) => setNationality(e.target.value)}
@@ -165,6 +168,7 @@ export function PassengerForm({ flight, seat }: PassengerFormProps) {
           <Calendar className="w-3.5 h-3.5" /> Date of Birth
         </label>
         <input
+          suppressHydrationWarning
           type="date"
           value={dob}
           onChange={(e) => setDob(e.target.value)}
@@ -178,6 +182,7 @@ export function PassengerForm({ flight, seat }: PassengerFormProps) {
       {/* Actions */}
       <div className="flex flex-col sm:flex-row gap-3 pt-2">
         <button
+          suppressHydrationWarning
           type="button"
           onClick={() => router.back()}
           className="flex items-center justify-center gap-2 border border-gray-200 text-gray-600 hover:bg-gray-50 font-medium px-5 py-3 rounded-xl transition-colors text-sm"
@@ -186,6 +191,7 @@ export function PassengerForm({ flight, seat }: PassengerFormProps) {
         </button>
 
         <button
+          suppressHydrationWarning
           type="submit"
           disabled={loading}
           className={cn(

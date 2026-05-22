@@ -67,14 +67,14 @@ export function SearchForm() {
   const labelClass = 'flex items-center gap-1.5 text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5'
 
   return (
-    <form onSubmit={handleSubmit} className="w-full">
+    <form onSubmit={handleSubmit} className="w-full" suppressHydrationWarning>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
         <div>
           <label className={labelClass}>
             <PlaneTakeoff className="w-3.5 h-3.5" /> From
           </label>
-          <select value={origin} onChange={(e) => setOrigin(e.target.value)} className={inputClass}>
+          <select suppressHydrationWarning value={origin} onChange={(e) => setOrigin(e.target.value)} className={inputClass}>
             <option value="">Select city</option>
             {AIRPORTS.map((a) => (
               <option key={a.code} value={a.code}>{a.label}</option>
@@ -86,7 +86,7 @@ export function SearchForm() {
           <label className={labelClass}>
             <PlaneLanding className="w-3.5 h-3.5" /> To
           </label>
-          <select value={destination} onChange={(e) => setDestination(e.target.value)} className={inputClass}>
+          <select suppressHydrationWarning value={destination} onChange={(e) => setDestination(e.target.value)} className={inputClass}>
             <option value="">Select city</option>
             {AIRPORTS.map((a) => (
               <option key={a.code} value={a.code}>{a.label}</option>
@@ -97,6 +97,7 @@ export function SearchForm() {
         <div>
           <label className={labelClass}>Date</label>
           <input
+            suppressHydrationWarning
             type="date"
             value={date}
             min={getTodayString()}
@@ -108,6 +109,7 @@ export function SearchForm() {
         <div>
           <label className={labelClass}>Passengers</label>
           <select
+            suppressHydrationWarning
             value={passengers}
             onChange={(e) => setPassengers(Number(e.target.value))}
             className={inputClass}
@@ -126,6 +128,7 @@ export function SearchForm() {
       )}
 
       <button
+        suppressHydrationWarning
         type="submit"
         className="mt-4 w-full sm:w-auto flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold px-8 py-3 rounded-xl transition-colors"
       >

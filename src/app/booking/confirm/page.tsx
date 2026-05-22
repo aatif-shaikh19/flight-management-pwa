@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { formatTime, formatDate, formatPrice, getAirportName, getFlightDuration } from '@/lib/utils'
 import { CheckCircle, Plane, MapPin, Clock, User, Tag } from 'lucide-react'
+import { StoreResetOnBookingComplete } from '@/components/ui/StoreResetOnCancel'
 
 type ConfirmPageProps = {
   searchParams: Promise<{ pnr?: string }>
@@ -43,6 +44,7 @@ export default async function ConfirmPage({ searchParams }: ConfirmPageProps) {
 
   return (
     <main className="max-w-lg mx-auto px-4 py-8">
+      <StoreResetOnBookingComplete />
       {/* Success header */}
       <div className="text-center mb-8">
         <div className="flex justify-center mb-3">
